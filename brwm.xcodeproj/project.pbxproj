@@ -6,13 +6,51 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		9D01C10F2E2F449600658490 /* SkyLight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D01C10E2E2F449600658490 /* SkyLight.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		9D01C10E2E2F449600658490 /* SkyLight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SkyLight.framework; path = ../../../../System/Library/PrivateFrameworks/SkyLight.framework; sourceTree = "<group>"; };
+		9D69CA592E30877400B18734 /* p8.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = p8.js; sourceTree = "<group>"; };
 		9DEBD5952E2C6B1C0006E827 /* libbrwm.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libbrwm.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		9DBBE49E2E31499200D56600 /* Exceptions for "brwm" folder in "brwm" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				log.h,
+			);
+			target = 9DEBD5942E2C6B1C0006E827 /* brwm */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		9DBBE4982E31472600D56600 /* Exceptions for "brwm" folder in "Headers" phase from "brwm" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 9DEBD5912E2C6B1C0006E827 /* Headers */;
+			membershipExceptions = (
+				spaces.m,
+			);
+		};
+		9DBBE49F2E31499200D56600 /* Exceptions for "brwm" folder in "Compile Sources" phase from "brwm" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = 9DEBD5922E2C6B1C0006E827 /* Sources */;
+			membershipExceptions = (
+				log.h,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9DEBD5972E2C6B1C0006E827 /* brwm */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				9DBBE49E2E31499200D56600 /* Exceptions for "brwm" folder in "brwm" target */,
+				9DBBE4982E31472600D56600 /* Exceptions for "brwm" folder in "Headers" phase from "brwm" target */,
+				9DBBE49F2E31499200D56600 /* Exceptions for "brwm" folder in "Compile Sources" phase from "brwm" target */,
+			);
 			path = brwm;
 			sourceTree = "<group>";
 		};
@@ -23,16 +61,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D01C10F2E2F449600658490 /* SkyLight.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D01C10D2E2F449600658490 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9D01C10E2E2F449600658490 /* SkyLight.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9DEBD58C2E2C6B1C0006E827 = {
 			isa = PBXGroup;
 			children = (
+				9D69CA592E30877400B18734 /* p8.js */,
 				9DEBD5972E2C6B1C0006E827 /* brwm */,
+				9D01C10D2E2F449600658490 /* Frameworks */,
 				9DEBD5962E2C6B1C0006E827 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -242,24 +291,45 @@
 		9DEBD59F2E2C6B1C0006E827 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					arm64e,
+				);
 				CODE_SIGN_STYLE = Automatic;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SYMROOT = ./build;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 			};
 			name = Debug;
 		};
 		9DEBD5A02E2C6B1C0006E827 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALLOW_TARGET_PLATFORM_SPECIALIZATION = YES;
+				ARCHS = (
+					"$(ARCHS_STANDARD)",
+					arm64e,
+				);
 				CODE_SIGN_STYLE = Automatic;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SYMROOT = ./build;
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 			};
 			name = Release;
 		};
