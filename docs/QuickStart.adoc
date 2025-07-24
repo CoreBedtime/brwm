@@ -1,5 +1,5 @@
 = BRWM Quick Start Guide
-:author: CoreBedtime, aspauldingcode
+:author: CoreBedtime
 :version: 0.1.0-pre-alpha
 :toc: left
 :toclevels: 3

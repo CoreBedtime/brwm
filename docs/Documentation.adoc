@@ -500,6 +500,20 @@ If BRWM causes system instability:
 |// TODO: Complete function documentation
 |===
 
+==== Utility API
+[cols="1,2,3"]
+|===
+|Function |Parameters |Description
+
+|`sleep(milliseconds)`
+|milliseconds: number
+|// TODO: Complete function documentation
+
+|`getKeyConstants()`
+|None
+|// TODO: Complete function documentation
+|===
+
 === Constants and Enums
 
 ==== Key Constants
