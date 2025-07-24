@@ -1,0 +1,571 @@
+= BRWM Documentation
+:author: Bedtime
+:version: 0.1.0-pre-alpha
+:toc: left
+:toclevels: 4
+:icons: font
+:source-highlighter: rouge
+:experimental:
+:sectlinks:
+:sectanchors:
+:idprefix:
+:idseparator: -
+
+[.lead]
+Comprehensive documentation for BRWM - Bedtime's *real* window manager for macOS.
+
+== Getting Started
+
+=== Installation Guide
+
+[WARNING]
+====
+**BRWM is pre-alpha software.** This software requires disabling System Integrity Protection (SIP) and installing the Ammonia injector. Only proceed if you understand the security implications.
+====
+
+==== Prerequisites
+
+===== System Requirements
+* macOS Ventura (13.0) or later
+* Intel or Apple Silicon Mac
+* Administrator privileges
+
+===== Security Requirements
+The following security features must be disabled:
+
+1. **System Integrity Protection (SIP)** - Required for system-level hooks
+2. **Library Validation** - Required for code injection
+
+==== Step-by-Step Installation
+
+===== Step 1: Disable SIP
+
+[IMPORTANT]
+====
+Disabling SIP reduces your system's security. Only proceed if you understand the risks.
+====
+
+1. **Boot into Recovery Mode:**
+   * **Apple Silicon**: Hold power button until "Loading startup options" appears, click "Options"
+   * **Intel**: Hold kbd:[Cmd+R] during startup
+
+2. **Open Terminal** (from Utilities menu) and run:
++
+[source,bash]
+----
+csrutil disable
+----
+
+3. **Restart your Mac**
+
+4. **Disable Library Validation:**
++
+[source,bash]
+----
+sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true
+----
+
+5. **For Apple Silicon Macs**, enable preview ABI:
++
+[source,bash]
+----
+sudo nvram boot-args="-arm64e_preview_abi"
+----
+
+===== Step 2: Install Ammonia Injector
+
+BRWM requires the Ammonia injector from CoreBedtime.
+
+[source,bash]
+----
+git clone https://github.com/CoreBedtime/ammonia
+cd ammonia
+./install.sh
+----
+
+===== Step 3: Build and Install BRWM
+
+[source,bash]
+----
+git clone https://github.com/bedtime/brwm
+cd brwm
+xcodebuild -project brwm.xcodeproj -scheme brwm -configuration Release
+----
+
+==== Verification
+// TODO: How to verify installation was successful
+
+=== First Configuration
+
+==== Understanding the JavaScript API
+
+BRWM uses JavaScript for configuration. The default configuration (`p8.js`) provides a complete example of window management setup.
+
+==== Basic Configuration Examples
+
+===== Example JavaScript Configuration
+
+[source,javascript]
+----
+// Configure modifiers and layout
+const MODIFIERS = getKeyConstants().MOD.CMD | getKeyConstants().MOD.ALT;
+const OUTER_PADDING = 85;
+const WINDOW_GAP = 55;
+
+// Master-stack layout function
+function masterStackLayout() {
+    const screenSize = getScreenSize();
+    const windows = getWindows();
+    
+    // Layout logic here...
+}
+
+// Add custom keybindings
+addKeybind(KEYS.SPACE, MODIFIERS, () => {
+    // Custom action
+});
+----
+
+==== Testing Your Setup
+// TODO: How to test that everything is working
+
+== Configuration Reference
+
+=== JavaScript API
+
+==== Core Functions
+
+===== Window Management
+
+[cols="1,3"]
+|===
+|Function |Description
+
+|`getWindows()`
+|Returns array of tileable windows in current space
+
+|`setWindowFrame(wid, x, y, width, height)`
+|Sets window position and size
+
+|`getScreenSize()`
+|Returns screen dimensions object
+
+|`spaceList()`
+|Returns array of available workspace IDs
+
+|`traverseSpace(index)`
+|Switches to workspace at given index
+
+|`addKeybind(key, modifiers, callback)`
+|Registers keyboard shortcut
+|===
+
+===== Event Handling
+
+BRWM provides real-time event handling for:
+
+* Window creation and destruction
+* Workspace changes
+* Keyboard events
+* Application lifecycle events
+
+==== Advanced Configuration
+
+===== Custom Layouts
+// TODO: How to create custom window layouts
+// - Layout algorithms
+// - Dynamic layouts
+// - Layout persistence
+
+===== Animation System
+// TODO: Window animation configuration
+// - Lerp functions
+// - Timing controls
+// - Performance considerations
+
+===== Multi-Monitor Setup
+// TODO: Configuration for multiple displays
+// - Per-monitor settings
+// - Display detection
+// - Workspace distribution
+
+=== Configuration Examples
+
+==== Tiling Window Manager
+// TODO: Complete tiling WM configuration
+
+==== Floating Window Manager
+// TODO: Floating window management setup
+
+==== Hybrid Layouts
+// TODO: Mixed tiling and floating configurations
+
+==== Gaming Optimized
+// TODO: Configuration optimized for gaming
+
+== Architecture
+
+=== System Integration
+
+==== Skylight Framework Integration
+// TODO: How BRWM integrates with Skylight
+// - Low-level window access
+// - System hooks
+// - Performance implications
+
+==== Dock Integration
+// TODO: Dock.Spaces integration details
+// - Space switching mechanism
+// - Dock hooks
+// - Compatibility considerations
+
+==== Ammonia Injector
+// TODO: How BRWM uses Ammonia
+// - Injection mechanism
+// - Security implications
+// - Alternative approaches
+
+=== Code Architecture
+
+==== Core Components
+// TODO: Overview of main components
+// - brwm_core.m
+// - brwm_application.m
+// - window.m
+// - spacesptr.m
+// - xbinds.m
+
+==== JavaScript Engine
+// TODO: JavaScript integration details
+// - JavaScriptCore usage
+// - Bridge functions
+// - Memory management
+
+==== Event System
+// TODO: Event handling architecture
+// - CGEventTap
+// - Keyboard events
+// - Window events
+
+== Advanced Topics
+
+=== Performance Optimization
+
+==== Memory Management
+// TODO: Memory optimization techniques
+
+==== CPU Usage
+// TODO: Minimizing CPU overhead
+
+==== Battery Life
+// TODO: Power efficiency considerations
+
+=== Security Considerations
+
+==== SIP Implications
+
+WARNING: Disabling System Integrity Protection (SIP) has significant security implications:
+
+**What SIP Protects:**
+
+* System files and directories from modification
+* Running processes from code injection
+* System binaries from being replaced
+* Kernel extensions from loading without proper signatures
+
+**Risks of Disabling SIP:**
+
+* Malware can modify system files
+* Increased vulnerability to privilege escalation attacks
+* Potential system instability
+* Voided warranty on some enterprise systems
+* May break some security-dependent applications
+
+**Mitigation Strategies:**
+
+* Only disable SIP on development/personal machines
+* Keep your system updated with latest security patches
+* Use strong passwords and enable FileVault encryption
+* Regularly backup your system
+* Monitor system logs for suspicious activity
+* Consider using a dedicated development machine
+
+==== Code Signing
+
+BRWM bypasses normal code signing restrictions through Ammonia:
+
+* Applications injected via Ammonia run with elevated privileges
+* Code signature validation is bypassed
+* This enables deep system integration but reduces security
+
+**Best Practices:**
+
+* Only run BRWM from trusted sources
+* Verify the integrity of BRWM source code before building
+* Keep Ammonia updated to latest version
+* Monitor for unexpected system behavior
+
+==== Sandboxing
+
+BRWM operates outside normal macOS sandboxing:
+
+* Can access any application's windows
+* Can monitor all keyboard input
+* Can modify system-level window management
+* Has access to private macOS APIs
+
+**Privacy Considerations:**
+
+* BRWM can potentially log keystrokes (though it doesn't by default)
+* Window content and titles are accessible
+* Application usage patterns are visible
+* Consider these factors in shared or corporate environments
+
+=== Debugging and Development
+
+==== Debug Logging
+// TODO: How to enable and use debug logging
+
+==== Development Environment
+// TODO: Setting up development environment
+
+==== Contributing Guidelines
+// TODO: How to contribute to BRWM
+
+==== Testing Framework
+// TODO: Testing methodologies and tools
+
+== Troubleshooting
+
+=== Common Issues
+
+==== Installation Problems
+
+**BRWM won't start after installation**
+
+* Verify SIP is disabled: `csrutil status`
+* Check Library Validation is disabled
+* Ensure Ammonia is properly installed
+* Check console logs for error messages
+
+**Ammonia injection fails**
+
+* Restart your Mac after disabling SIP
+* Verify you're running the correct Ammonia version
+* Check that BRWM is built for your architecture (Intel/Apple Silicon)
+
+**Build errors in Xcode**
+
+* Ensure you have the latest Xcode version
+* Clean build folder (⌘+Shift+K)
+* Check that all dependencies are properly linked
+
+==== Runtime Errors
+
+**Windows not responding to layout commands**
+
+* Check if the application supports window management
+* Verify the window is not in fullscreen mode
+* Some apps (like System Preferences) cannot be managed
+
+**Keybindings not working**
+
+* Check for conflicts with system shortcuts
+* Verify JavaScript syntax in your configuration
+* Restart BRWM to reload configuration
+
+**JavaScript errors in console**
+
+* Check `/tmp/brwm.log` for detailed error messages
+* Verify your JavaScript syntax
+* Ensure all required functions are defined
+
+==== Performance Issues
+
+**High CPU usage**
+
+* Reduce the frequency of layout updates
+* Check for infinite loops in your JavaScript
+* Monitor system resources with Activity Monitor
+
+**Memory leaks**
+
+* Restart BRWM periodically during development
+* Check for retained window references
+* Monitor memory usage over time
+
+=== Error Messages
+
+==== JavaScript Errors
+
+**"ReferenceError: function is not defined"**
+
+Ensure all functions are properly declared before use.
+
+**"TypeError: Cannot read property of undefined"**
+
+Check that window objects exist before accessing properties.
+
+==== System Errors
+
+**"Operation not permitted"**
+
+Usually indicates SIP is still enabled or Library Validation is active.
+
+**"Code signature invalid"**
+
+May require rebuilding BRWM or updating Ammonia.
+
+==== Log Analysis
+
+Check `/tmp/brwm.log` for detailed error information:
+
+```bash
+tail -f /tmp/brwm.log
+```
+
+=== Recovery Procedures
+
+==== Restoring SIP
+
+If you need to re-enable SIP:
+
+1. Boot into Recovery Mode (⌘+R during startup)
+2. Open Terminal from Utilities menu
+3. Run: `csrutil enable`
+4. Restart your Mac
+
+WARNING: Re-enabling SIP will disable BRWM functionality.
+
+==== Uninstalling BRWM
+
+1. Stop BRWM if running
+2. Remove the application bundle
+3. Delete configuration files: `~/Library/Application Support/BRWM/`
+4. Remove logs: `/tmp/brwm.log`
+5. Optionally re-enable SIP (see above)
+
+==== System Recovery
+
+If BRWM causes system instability:
+
+1. Boot into Safe Mode (hold Shift during startup)
+2. Remove BRWM application
+3. Re-enable SIP if desired
+4. Restart normally
+
+== API Reference
+
+=== JavaScript Functions
+
+==== Window Management API
+[cols="1,2,3"]
+|===
+|Function |Parameters |Description
+
+|`getWindows()`
+|None
+|// TODO: Complete function documentation
+
+|`setWindowFrame(wid, x, y, width, height)`
+|wid: number, x: number, y: number, width: number, height: number
+|// TODO: Complete function documentation
+
+|`getScreenSize()`
+|None
+|// TODO: Complete function documentation
+|===
+
+==== Space Management API
+[cols="1,2,3"]
+|===
+|Function |Parameters |Description
+
+|`spaceList()`
+|None
+|// TODO: Complete function documentation
+
+|`traverseSpace(index)`
+|index: number
+|// TODO: Complete function documentation
+|===
+
+==== Event API
+[cols="1,2,3"]
+|===
+|Function |Parameters |Description
+
+|`addKeybind(key, modifiers, callback)`
+|key: number, modifiers: number, callback: function
+|// TODO: Complete function documentation
+|===
+
+=== Constants and Enums
+
+==== Key Constants
+// TODO: Complete key constant documentation
+
+==== Modifier Constants
+// TODO: Complete modifier constant documentation
+
+==== Window States
+// TODO: Window state enumerations
+
+== Examples and Recipes
+
+=== Basic Configurations
+
+==== Simple Tiling
+// TODO: Basic tiling configuration example
+
+==== Workspace Management
+// TODO: Workspace switching examples
+
+==== Custom Keybindings
+// TODO: Custom keybinding examples
+
+=== Advanced Configurations
+
+==== Dynamic Layouts
+// TODO: Advanced layout examples
+
+==== Multi-Monitor Setups
+// TODO: Multi-monitor configuration examples
+
+==== Application-Specific Rules
+// TODO: Per-application configuration
+
+=== Integration Examples
+
+==== Alfred Integration
+// TODO: How to integrate with Alfred
+
+==== Hammerspoon Migration
+// TODO: Migrating from Hammerspoon
+
+==== Yabai Comparison
+// TODO: Differences and migration from Yabai
+
+== Appendices
+
+=== Appendix A: System Requirements
+// TODO: Detailed system requirements
+
+=== Appendix B: Compatibility Matrix
+// TODO: macOS version compatibility
+
+=== Appendix C: Performance Benchmarks
+// TODO: Performance data and benchmarks
+
+=== Appendix D: Security Analysis
+// TODO: Detailed security analysis
+
+=== Appendix E: Legal Considerations
+// TODO: Legal implications and disclaimers
+
+---
+
+**Note**: This documentation is a work in progress. Sections marked with "TODO" are planned for future releases.
+
+**Last Updated**: {docdate} +
+**Version**: {version}

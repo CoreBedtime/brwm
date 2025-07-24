@@ -1,0 +1,66 @@
+= BRWM - Bedtime's *real* window manager
+:author: Bedtime
+:version: 0.1.0-pre-alpha
+
+[.lead]
+A powerful, configurable, and scriptable window manager for macOS that integrates directly into the system using Skylight and Dock hooks.
+
+image:https://img.shields.io/badge/macOS-Ventura%2B-blue[macOS Support]
+image:https://img.shields.io/badge/Status-Pre--Alpha-red[Status]
+image:https://img.shields.io/badge/SIP-Disabled%20Required-red[SIP Required]
+image:https://img.shields.io/badge/License-MIT-green[License]
+
+== 🚀 Features
+
+* **Workspace Control**: Switch between any workspace instantly using hotkeys
+* **Window Manipulation**: Send windows to any space with ease
+* **JavaScript API**: Full scripting interface for custom automation
+* **System Integration**: Direct Skylight and Dock framework integration
+* **Configurable Layouts**: Master-stack layout with adjustable ratios
+* **Smooth Animations**: Lerp functions for beautiful window transitions
+
+== ⚠️ Important Notice
+
+[WARNING]
+====
+**BRWM is pre-alpha software.** This requires disabling System Integrity Protection (SIP) and installing the Ammonia injector. See link:docs/Documentation.adoc[full documentation] for detailed setup instructions.
+====
+
+== 📖 Documentation
+
+For installation instructions, configuration guides, and API reference:
+
+link:docs/Documentation.adoc[📚 Complete Documentation]
+
+== 🎯 Quick Start
+
+For detailed setup instructions: link:docs/QuickStart.adoc[📋 Quick Start Guide]
+
+Default keybindings (configurable via JavaScript):
+
+* kbd:[Cmd+Alt+1-9]: Switch to workspace 1-9
+* kbd:[Cmd+Alt+H]: Decrease master window ratio
+* kbd:[Cmd+Alt+L]: Increase master window ratio
+
+== 🏗️ Project Structure
+
+[source]
+----
+brwm/
+├── brwm/                    # Core source files
+├── p8.js                   # Default JavaScript configuration
+└── docs/Documentation.adoc # Complete documentation
+----
+
+== 📄 License
+
+MIT License - See link:LICENSE[LICENSE] file for details.
+
+== 👥 Contributors
+
+**Author**: CoreBedtime +
+**Developers**: CoreBedtime, aspauldingcode
+
+---
+
+**Status**: Pre-Alpha Software
