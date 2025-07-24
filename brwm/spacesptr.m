@@ -5,8 +5,7 @@
 //  Created by bedtime on 7/23/25.
 //
 //  This file aggressively hooks NSObject's +alloc method to intercept the
-//  allocation of the Dock.Spaces Swift class instance. After the instance
-//  is captured, the hook is immediately removed to restore performance.
+//  allocation of the Dock.Spaces Swift class instance (and maybe other objects).
 //
 //  Use this with caution and only when you have no safer alternative.
 //
@@ -14,6 +13,7 @@
 #import <libproc.h>
 #import <objc/runtime.h>
 #import <Foundation/Foundation.h>
+#import <QuartzCore/QuartzCore.h>
 
 #import "log.h"
 
@@ -57,10 +57,6 @@ static void hook_NSObject_init_for_spaces(void) {
             BRLog(@"[BRWM] Captured instance: %s.", className);
             id instance = origInitFunc(self, _cmd);
             gDockSpacesInstance = instance;
-
-            // Restore original implementation immediately after capture
-            method_setImplementation(origInitMethod, origInitIMP);
-
             return instance;
         }
 

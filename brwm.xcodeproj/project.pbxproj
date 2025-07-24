@@ -31,7 +31,7 @@
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = 9DEBD5912E2C6B1C0006E827 /* Headers */;
 			membershipExceptions = (
-				spaces.m,
+				spacesptr.m,
 			);
 		};
 		9DBBE49F2E31499200D56600 /* Exceptions for "brwm" folder in "Compile Sources" phase from "brwm" target */ = {
