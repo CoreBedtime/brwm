@@ -10,21 +10,19 @@ image:https://img.shields.io/badge/Status-Pre--Alpha-red[Status]
 image:https://img.shields.io/badge/SIP-Disabled%20Required-red[SIP Required]
 image:https://img.shields.io/badge/License-MIT-green[License]
 
-== ⚠️ Important Notice
+== ⚠️ Important Notices
 
 [WARNING]
 ====
-**BRWM is pre-alpha software.** This requires disabling System Integrity Protection (SIP) and installing the Ammonia injector. See link:docs/Documentation.adoc[full documentation] for detailed setup instructions.
+**BRWM is pre-alpha software.** We also require disabling System Integrity Protection (SIP) and installing the Ammonia injector. See link:docs/Documentation.adoc[full documentation] for detailed setup instructions.
 ====
 
 == 🚀 Features
 
-* **Workspace Control**: Switch between any workspace instantly using hotkeys
-* **Window Manipulation**: Send windows to any space with ease
+* **Space Control**: Switch between any workspace with any keybind
+* **Window Manipulation**: Control windows with ease
 * **JavaScript API**: Full scripting interface for custom automation
-* **System Integration**: Direct Skylight and Dock framework integration
-* **Configurable Layouts**: Master-stack layout with adjustable ratios
-* **Smooth Animations**: Lerp functions for beautiful window transitions
+* **Smooth Animations**: Functions for beautiful window transitions
 
 == 🎯 Quick Start
 
@@ -62,5 +60,3 @@ See link:LICENSE[LICENSE] file for complete details.
 **Created by**: CoreBedtime +
 
 ---
-
-**Status**: Pre-Alpha Software
