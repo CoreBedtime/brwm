@@ -1,0 +1,160 @@
+= BRWM Quick Start Guide
+:author: CoreBedtime
+:version: 0.1.0-pre-alpha
+:toc: left
+:toclevels: 3
+
+== Prerequisites
+
+WARNING: BRWM requires disabling System Integrity Protection (SIP) and installing Ammonia. This has security implications. Only proceed if you understand the risks.
+
+=== System Requirements
+
+* macOS Ventura (13.0) or later
+* Xcode or Xcode Command Line Tools
+* Administrator access
+* Understanding of security implications
+
+== Quick Installation
+
+=== 1. Disable SIP
+
+For Intel Macs:
+
+1. Restart your Mac and hold kbd:[⌘+R] during boot
+2. Open Terminal from Utilities menu
+3. Run: `csrutil disable`
+4. Restart your Mac
+
+For Apple Silicon Macs:
+
+1. Shut down your Mac completely
+2. Press and hold the Power button until "Loading startup options" appears
+3. Click "Options" and continue
+4. Select a user and enter their password if prompted
+5. Open Terminal from Utilities menu
+6. Run: `csrutil disable`
+7. Click Apple menu and select "Restart"
+
+=== 2. Disable Library Validation
+
+```bash
+sudo defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true
+```
+
+=== 3. Install Ammonia
+
+1. Download Ammonia from https://github.com/CoreBedtime/ammonia/releases[CoreBedtime/ammonia releases]
+2. Install according to Ammonia's instructions
+3. Restart your Mac
+
+=== 4. Build and Run BRWM
+
+Clone the repository:
+
+[source,bash]
+----
+git clone git@github.com:aspauldingcode/brwm.git
+cd brwm
+----
+
+Open in Xcode and build for Universal Binary (aarch64, aarch64e, x86_64). Select "Any Mac" as the build target, then press kbd:[⌘+B]:
+
+[source,text]
+----
+xed brwm.xcodeproj
+----
+
+Alternatively, build a Universal Binary from the command line. This creates a single executable compatible with Apple's signed pointer ABI, Apple Silicon processors (arm64, arm64e), and Intel processors (x86_64):
+[source,bash]
+----
+xcodebuild -project brwm.xcodeproj -scheme brwm build -arch arm64 -arch arm64e -arch x86_64
+----
+
+== Default Keybindings
+
+Once BRWM is running, these keybindings are available:
+
+[cols="1,2"]
+|===
+|Keybinding |Action
+
+|kbd:[⌘+⌥+1] through kbd:[⌘+⌥+9]
+|Switch to workspace 1-9
+
+|kbd:[⌘+⌥+H]
+|Decrease master window ratio
+
+|kbd:[⌘+⌥+L]
+|Increase master window ratio
+|===
+
+== Basic Configuration
+
+BRWM uses JavaScript for configuration. The default configuration is in `p8.js`.
+
+=== Example: Custom Keybinding
+
+```javascript
+// Add a custom keybinding to move window to next space
+addKeybind(49, MODIFIERS.CMD | MODIFIERS.ALT, function() {
+    // Space key (49) + Cmd+Alt
+    var windows = getWindows();
+    if (windows.length > 0) {
+        // Move focused window to next space
+        // Implementation depends on your needs
+    }
+});
+```
+
+=== Example: Adjust Layout Settings
+
+```javascript
+// Modify layout constants
+const OUTER_PADDING = 20;    // Padding around screen edges
+const WINDOW_GAP = 10;       // Gap between windows
+let masterRatio = 0.6;       // Master window ratio (60%)
+```
+
+== Troubleshooting
+
+=== BRWM Won't Start
+
+1. Verify SIP is disabled: `csrutil status`
+2. Check that Ammonia is properly installed
+3. Ensure BRWM is built for your architecture
+4. Check console logs for errors
+
+=== Keybindings Not Working
+
+1. Check for conflicts with system shortcuts
+2. Verify JavaScript syntax in configuration
+3. Restart BRWM to reload configuration
+
+=== Performance Issues
+
+1. Monitor CPU usage in Activity Monitor
+2. Check for infinite loops in JavaScript
+3. Reduce layout update frequency if needed
+
+== Next Steps
+
+* See the link:Documentation.adoc#_api_reference[API Reference] for the full JavaScript API documentation
+* Read the link:Documentation.adoc[complete documentation] for advanced features
+* Customize your JavaScript configuration in `p8.js`
+* Explore the JavaScript API for automation
+* Join the community for support and contributions
+
+== Security Notice
+
+Remember that disabling SIP reduces your system's security. Consider:
+
+* Only use on development/personal machines
+* Keep your system updated
+* Use strong passwords and FileVault encryption
+* Regular system backups
+* Monitor for suspicious activity
+
+---
+
+For detailed information, see link:Documentation.adoc[Complete Documentation].
